@@ -102,6 +102,115 @@ git push origin ten-cua-ban
 
 ---
 
+### 4.6 Hướng dẫn Merge code (Nên đọc)
+
+Mỗi thành viên phải merge code theo quy trình chuẩn để tránh xung đột và ghi đè code của người khác. Merge chỉ được thực hiện thông qua Pull Request.
+
+---
+
+## 4.6.1. Quy tắc chung
+
+* Không được merge trực tiếp vào nhánh main.
+* Mỗi người làm trên **branch riêng**.
+* Merge vào main phải thông qua **Pull Request (PR)**.
+* Trước khi tạo PR, luôn phải **cập nhật code từ main** về nhánh của mình.
+
+---
+
+## 4.6.2. Quy trình merge chuẩn bằng Pull Request (Khuyên dùng)
+
+### Bước 1: Push code lên branch của bạn
+
+```bash
+git add .
+git commit -m "Mo ta ro rang thay doi"
+git push origin ten-branch
+```
+
+### Bước 2: Tạo Pull Request trên GitHub
+
+1. Lên GitHub → Repo của dự án
+2. Chọn: **Compare & Pull Request**
+3. Kiểm tra:
+
+   * Base branch: `main`
+   * Compare branch: `ten-branch-cua-ban`
+4. Viết mô tả thay đổi
+5. Nhấn **Create Pull Request**
+
+### Bước 3: Chờ review và merge
+
+* Trưởng nhóm hoặc người review sẽ kiểm tra.
+* Khi hợp lệ → bấm **Merge Pull Request**.
+
+### Bước 4: Xóa branch nếu muốn
+
+GitHub sẽ hiển thị nút “Delete branch”.
+
+---
+
+## 4.6.3. Cập nhật code từ main trước khi merge
+
+Để tránh conflict, làm trên nhánh của bạn:
+
+```bash
+git checkout ten-branch
+git pull origin main
+```
+
+Nếu có conflict → sửa → commit → push lại.
+
+---
+
+## 4.6.4. Merge bằng terminal (Chỉ dùng khi cần)
+
+Ví dụ merge nhánh `son` vào `main`:
+
+```bash
+git checkout main
+git pull origin main
+git merge son
+git push origin main
+```
+
+---
+
+## 4.6.5. Xử lý conflict khi merge
+
+Nếu Git báo xung đột, file sẽ xuất hiện:
+
+```
+<<<<<<< HEAD
+Code đang có trong main
+=======
+Code từ branch của bạn
+>>>>>>> branch
+```
+
+Cách xử lý:
+
+* Giữ lại phần đúng
+* Xóa các ký hiệu
+* Lưu file
+
+Sau đó:
+
+```bash
+git add .
+git commit -m "Fix conflict"
+git push
+```
+
+---
+
+## 4.6.6. Tóm tắt luồng merge chuẩn
+
+```
+Branch cá nhân → Push code → Pull Request → Review → Merge vào main
+```
+
+---
+
 ## 5. Quy tắc commit
 
 Commit phải rõ ràng, mô tả chính xác phần đã làm.
